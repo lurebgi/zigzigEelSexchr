@@ -11,15 +11,15 @@
 
 module load hisat2
 
-#hisat2-build monk.fa monk.fa
+hisat2-build zigzag.chrX.fa zigzag.chrX.fa
 
-cp monk.fa* $TMPDIR
+cp zigzag.chrX.fa* $TMPDIR
 
-hisat2 -x $TMPDIR/monk.fa -p 16 -5 5 -3 5 -1 /proj/luohao/parakeet/data/RNA-seq/YY16_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY19_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY20_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY22_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY23_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY24_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY28_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY32_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY33_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT189_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT232_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT235_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT236_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT238_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT239_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT240_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT242_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT244_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT247_R1.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT248_R1.fq.gz -2 /proj/luohao/parakeet/data/RNA-seq/YY16_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY19_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY20_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY22_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY23_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY24_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY28_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY32_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/YY33_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT189_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT232_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT235_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT236_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT238_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT239_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT240_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT242_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT244_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT247_R2.fq.gz,/proj/luohao/parakeet/data/RNA-seq/ZYT248_R2.fq.gz  -S $TMPDIR/monk.sam -k 4 --max-intronlen 100000 --min-intronlen 30
+hisat2 -x $TMPDIR/zigzag.chrX.fa -p 10 -5 5 -3 5 -1 ../../transcriptome/link/blood_R1.fq.gz,../../transcriptome/link/brain_R1.fq.gz,../../transcriptome/link/eye_R1.fq.gz,../../transcriptome/link/fin_R1.fq.gz,../../transcriptome/link/gill_R1.fq.gz,../../transcriptome/link/gut_R1.fq.gz,../../transcriptome/link/heart_R1.fq.gz,../../transcriptome/link/liver_R1.fq.gz,../../transcriptome/link/muscle_R1.fq.gz,../../transcriptome/link/skin_R1.fq.gz,../../transcriptome/link/spleen_R1.fq.gz,../../transcriptome/link/testis_R1.fq.gz  -2 ../../transcriptome/link/blood_R2.fq.gz,../../transcriptome/link/brain_R2.fq.gz,../../transcriptome/link/eye_R2.fq.gz,../../transcriptome/link/fin_R2.fq.gz,../../transcriptome/link/gill_R2.fq.gz,../../transcriptome/link/gut_R2.fq.gz,../../transcriptome/link/heart_R2.fq.gz,../../transcriptome/link/liver_R2.fq.gz,../../transcriptome/link/muscle_R2.fq.gz,../../transcriptome/link/skin_R2.fq.gz,../../transcriptome/link/spleen_R2.fq.gz,../../transcriptome/link/testis_R2.fq.gz -S $TMPDIR/monk.sam -k 4 --max-intronlen 100000 --min-intronlen 20
 
 
-samtools sort $TMPDIR/monk.sam   -@ 16 -O BAM -o $TMPDIR/monk.sort.bam
+samtools sort $TMPDIR/monk.sam   -@ 10 -O BAM -o $TMPDIR/hap-X.sort.bam
 
-mv $TMPDIR/monk.sort.bam .
-samtools index monk.sort.bam
+mv $TMPDIR/hap-X.sort.bam .
+samtools index -@ 10 hap-X.sort.bam
  
